@@ -1,14 +1,43 @@
 const assinanteModel = require('../models/assinanteModel');
 
-class MovieController {
-  async salvar(req, res) {
-    let assinante = req.body;
-    const max = await assinanteModel.findOne({}).sort({ codigo: -1 });
-    assinante.id = max == null ? 1 : max.id + 1;
-    const resultado = await assinanteModel.create(assinante);
-    res.status(201).json(resultado);
-  }
 
+class MovieController {
+
+
+
+  async salvar (req, res) {
+    try {
+      const { originalname, buffer, mimetype } = req.file;
+      const { id, Nome, Sobrenome, DataNascimento, Telefone, Endereço, Cidade, Estado, Status } = req.body;
+      
+      
+      // Crie um novo documento de assinante com os dados informados
+      const assinante = new Assinante({
+        id,
+        Nome,
+        Sobrenome,
+        DataNascimento,
+        Telefone,
+        Endereço,
+        Cidade,
+        Estado,
+        Status,
+        ImagemPerfil: {
+          data: buffer,
+          contentType: mimetype
+        }
+      });
+      
+      // Salve o assinante no banco de dados
+      await assinante.save();
+      
+      res.send('Assinante criado com sucesso!');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Erro ao criar o assinante.');
+    }
+  }
+ 
   async listar(req, res) {
     const resultado = await assinanteModel.find({})
       .select('-_id id Nome Sobrenome Cidade Estado Status');

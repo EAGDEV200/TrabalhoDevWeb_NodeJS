@@ -10,7 +10,10 @@ const assinanteSchema = new mongoose.Schema({
   Cidade: String,
   Estado: String,
   Status: String,
-  ImagemPerfil: Buffer 
+  ImagemPerfil: {
+    data: Buffer,
+    contentType: String
+  }
 });
 
 module.exports = mongoose.model('assinantes', assinanteSchema);
