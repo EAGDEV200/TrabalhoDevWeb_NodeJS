@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 
 const assinanteSchema = new mongoose.Schema({
-  id: Number,
-  Nome: String,
-  Sobrenome: String,
-  DataNascimento: String,
-  Telefone: String,
-  Endereço: String,
-  Cidade: String,
-  Estado: String,
-  Status: String,
+  id: { type: Number },
+  Nome: { type: String },
+  Sobrenome: { type: String },
+  DataNascimento: { type: Date },
+  Telefone: { type: String },
+  Endereço: { type: String },
+  Cidade: { type: String },
+  Estado: { type: String },
+  Status: { type: String },
   ImagemPerfil: {
-    data: Buffer,
-    contentType: String
+    data: { type: Buffer },
+    contentType: { type: String }
   }
 });
 
-module.exports = mongoose.model('assinantes', assinanteSchema);
+const Assinante = mongoose.model('Assinante', assinanteSchema);
+
+module.exports = Assinante;
