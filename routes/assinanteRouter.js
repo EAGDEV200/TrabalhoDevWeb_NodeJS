@@ -7,7 +7,7 @@ const upload = multer();
 
 router.get('/listar', assinanteController.listar);
 router.get('/buscarUsuarios', assinanteController.buscarUsuarios);
-router.get('/listarPorNome/:Nome', assinanteController.listarPorNome);
+router.get('/listarPorNome, assinanteController.listarPorNome);
 router.get('/listarPorSobrenome', assinanteController.listarPorSobrenome);
 router.get('/listarPorCidade', assinanteController.listarPorCidade);
 router.get('/listarPorEstado', assinanteController.listarPorEstado);
